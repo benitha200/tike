@@ -1,0 +1,17 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 57" width="25" height="57">
+	<title>unavailable-svg</title>
+	<defs>
+		<image  width="21" height="53" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAA1AQMAAACUdTLjAAAAAXNSR0IB2cksfwAAAAZQTFRF8vLysuD/VgDq0wAAAAJ0Uk5TAP9bkSK1AAAAHklEQVR4nGOo//+B4f//H0MK/2H8wQCCIBpdDugfAEAmmNdAHl5MAAAAAElFTkSuQmCC"/>
+	</defs>
+	<style>
+	</style>
+	<g id="Layer">
+		<g id="Layer">
+			<g id="Layer">
+				<g id="Layer">
+					<use id="Layer" href="#img1" x="2" y="2"/>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>
