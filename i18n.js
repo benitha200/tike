@@ -8,7 +8,7 @@ i18n
   .init({
     fallbackLng: "en",
     lng: "en",
-    ns: ["common", "home", "listings", "contact"],
+    ns: ["common", "home", "listings", "booking"],
     defaultNS: "common",
     backend: {
       loadPath: "/locales/{{lng}}/{{ns}}.json",

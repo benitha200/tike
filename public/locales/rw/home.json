@@ -1,0 +1,56 @@
+{
+  "to": "ujya",
+  "title": "Gura amatike ya bisi bitakugoye",
+  "subtitle": "Mushyiremo imyirondoro yanyu",
+  "fromPlaceholder": "Aho uva",
+  "toPlaceholder": "Aho ugera",
+  "search": "Shakisha",
+  "locationError": "Nyamuneka hitamo aho uva n'aho ugera",
+  "features": {
+    "priorities": {
+      "title": "Urugendo rwawe, iby'ingenzi kuri wowe",
+      "description": "Ufite ingengo y'imari ntoya? Ufite gahunda nyinshi? Bika amatike ahuye n'ibyo ukeneye."
+    },
+    "coverage": {
+      "title": "Uburyo bwo kugera hose",
+      "description": "Zigama igihe ugereranya amahitamo yose y'urugendo rwawe rwa bisi ahantu hamwe."
+    },
+    "support": {
+      "title": "Ubufasha amasaha 24/7",
+      "description": "Itsinda ryacu ry'inzobere rihora rihari ngo rigufashe."
+    }
+  },
+  "topRoutes": {
+    "title": "Inzira za bisi zikunzwe cyane"
+  },
+  "whyJoin": {
+    "title": "Impamvu zo kwifatanya na Tike",
+    "subtitle": "Kugura no kwishyura byoroshye",
+    "benefits": [
+      "Genzura no gusubika ingendo zawe byoroshye",
+      "Bika uburyo bwo kwishyura n'amakuru yawe y'ubwishyu",
+      "Amakuru yawe arinzwe neza mu ngendo zawe!"
+    ]
+  },
+  "bookOnline": {
+    "title": "Bika amatike ya bisi kuri murandasi",
+    "description": "Buri munsi, abagenzi ibihumbi nkamwe bafata bisi bajya hagati y'imijyi. Hamwe na Tike, ushobora kugereranya bisi byoroshye no kubona amatike ya bisi ahendutse ku rugendo rwawe rukurikira. Niba ushaka kujya i Kampala, Nairobi, Bujumbura cyangwa ahandi muri aka karere, ushobora kureba amasaha ya bisi, ibiciro by'amatike n'ibikorwa bitangwa muri bisi. Hamwe na Tike, bika amatike ya bisi kuri murandasi byoroshye mu makompanyi meza. Reba amasaha, gereranya ibiciro kandi umenye serivisi zitangwa (WiFi, umwanya munini wo kurambura amaguru, uburenganzira bwo gutwara imizigo myinshi)."
+  },
+  "faq": {
+    "title": "Ibibazo bikunze kubazwa",
+    "questions": [
+      {
+        "question": "Ikibazo cya 1",
+        "answer": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda fugit et dicta maxime odit nemo ipsum molestiae repudiandae maiores numquam dolore, corporis, perferendis explicabo? Officia sint deserunt assumenda suscipit quas!"
+      },
+      {
+        "question": "Ikibazo cya 2",
+        "answer": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda fugit et dicta maxime odit nemo ipsum molestiae repudiandae maiores numquam dolore, corporis, perferendis explicabo? Officia sint deserunt assumenda suscipit quas!"
+      },
+      {
+        "question": "Ikibazo cya 3",
+        "answer": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda fugit et dicta maxime odit nemo ipsum molestiae repudiandae maiores numquam dolore, corporis, perferendis explicabo? Officia sint deserunt assumenda suscipit quas!"
+      }
+    ]
+  }
+}

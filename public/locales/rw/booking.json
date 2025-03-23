@@ -1,0 +1,50 @@
+{
+    "searchPrompt": "Injiza nimero ya telefone (niba atari ubwo mbere shakisha)",
+    "search": "Shakisha",
+    "searching": "Birimo gushakishwa...",
+    "passengerInfo": "Amakuru y'umugenzi",
+    "firstName": "Izina ryambere",
+    "lastName": "Izina ryanyuma",
+    "gender": "Igitsina",
+    "genderOptions": {
+        "male": "Gabo",
+        "female": "Gore"
+    },
+    "contactInfo": "Amakuru yo kuvugana",
+    "country": "Igihugu",
+    "email": "Imeyili",
+    "ticketOverview": "Incamake y'itike",
+    "refunds": {
+        "title": "GUSUBIZWA AMAFARANGA NO GUHINDURA",
+        "noRefunds": "Nta gusubizwa amafaranga",
+        "exchange": "Hindura itariki cyangwa igihe mbere y'isaha {{time}} ngo uhaguruke"
+    },
+    "boarding": {
+        "title": "IBIKENERWA MU KWINDA",
+        "id": "Indangamuntu / Pasiporo birakenewe",
+        "ticket": "Itike (yanditse cyangwa kuri mudasobwa)"
+    },
+    "luggage": {
+        "title": "IMIZIGO",
+        "carryOn": "Umufuka umwe w'imizigo yoroheje",
+        "carryOnWeight": "Uburemere ntarengwa bwa 10kg kuri buri mufuka woroheje",
+        "checked": "Umufuka umwe w'imizigo minini - umwe w'inyongera wishyurwa",
+        "checkedWeight": "Uburemere ntarengwa bwa 23kg kuri buri mufuka munini",
+        "checkedSize": "Ingano ntarengwa ya 50cm x 30cm x 78cm kuri buri mufuka munini"
+    },
+    "tripSummary": {
+        "title": "Incamake y'urugendo rwawe",
+        "departure": "Aho uva",
+        "departureTime": "Igihe cyo guhaguruka",
+        "arrival": "Aho ugera",
+        "arrivalTime": "Igihe cyo kugera",
+        "price": "Igiciro",
+        "duration": "Igihe urugendo rumara"
+    },
+    "continuePayment": "Komeza kuri Kwishyura",
+    "selectYourSeat": "Hitamo Intebe Yawe",
+    "available": "Irahari",
+    "pendingPayment": "Irimo Kwishyurwa",
+    "booked": "Yafashwe",
+    "failedPayment": "Kwishyura Byanze"
+}

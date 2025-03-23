@@ -1,0 +1,50 @@
+{
+    "searchPrompt": "Pas votre première fois ? Entrez votre numéro de téléphone",
+    "search": "Rechercher",
+    "searching": "Recherche en cours...",
+    "passengerInfo": "Informations sur le passager",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "gender": "Genre",
+    "genderOptions": {
+        "male": "Homme",
+        "female": "Femme"
+    },
+    "contactInfo": "Informations de contact",
+    "country": "Pays",
+    "email": "Email",
+    "ticketOverview": "Aperçu du billet",
+    "refunds": {
+        "title": "REMBOURSEMENTS ET ÉCHANGES",
+        "noRefunds": "Pas de remboursement",
+        "exchange": "Échange de date ou d'heure jusqu'à {{time}}h avant le départ"
+    },
+    "boarding": {
+        "title": "CONDITIONS D'EMBARQUEMENT",
+        "id": "Carte d'identité nationale / Passeport requis",
+        "ticket": "Billet (imprimé ou numérique)"
+    },
+    "luggage": {
+        "title": "BAGAGES",
+        "carryOn": "1 bagage à main",
+        "carryOnWeight": "Max 10kg par bagage à main",
+        "checked": "1 bagage en soute - 1 supplémentaire payant",
+        "checkedWeight": "Max 23kg par bagage en soute",
+        "checkedSize": "Max 50cm x 30cm x 78cm par bagage en soute"
+    },
+    "tripSummary": {
+        "title": "Résumé de votre voyage",
+        "departure": "Départ",
+        "departureTime": "Heure de départ",
+        "arrival": "Arrivée",
+        "arrivalTime": "Heure d'arrivée",
+        "price": "Prix",
+        "duration": "Durée"
+    },
+    "continuePayment": "Continuer vers le paiement",
+    "selectYourSeat": "Sélectionnez votre siège",
+    "available": "Disponible",
+    "pendingPayment": "Paiement en attente",
+    "booked": "Réservé",
+    "failedPayment": "Paiement échoué"
+}

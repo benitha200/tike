@@ -15,6 +15,7 @@ import Cookies from "js-cookie";
 import { v4 as uuidv4 } from 'uuid';
 import { format } from 'date-fns';
 import SeatSelection from "@/components/elements/seat-selection";
+import { useTranslation } from "react-i18next";
 
 interface Trip {
   id: string;
@@ -40,106 +41,11 @@ interface Traveler {
   email: string;
 }
 
-
-
-// Translation dictionary
-const translations = {
-  en: {
-    searchPrompt: "Not your first time? Enter phone number",
-    search: "Search",
-    searching: "Searching...",
-    passengerInfo: "Passenger Info",
-    firstName: "First name",
-    lastName: "Last name",
-    gender: "Gender",
-    genderOptions: {
-      male: "Male",
-      female: "Female"
-    },
-    contactInfo: "Contact Information",
-    country: "Country",
-    email: "Email",
-    ticketOverview: "Ticket Overview",
-    refunds: {
-      title: "REFUNDS AND EXCHANGES",
-      noRefunds: "No refunds",
-      exchange: "Exchange date or time up to 1hr before departure"
-    },
-    boarding: {
-      title: "BOARDING REQUIREMENTS",
-      id: "National ID Card / Passport required",
-      ticket: "Ticket (printed or digital)"
-    },
-    luggage: {
-      title: "LUGGAGE",
-      carryOn: "1 carry-on bag",
-      carryOnWeight: "Max 10kg per carry-on bag",
-      checked: "1 checked bag - free 1 extra - fees apply",
-      checkedWeight: "Max 23kg per checked bag",
-      checkedSize: "Max 50cm x 30cm x 78cm per checked bag"
-    },
-    tripSummary: {
-      title: "Your Trip Summary",
-      departure: "Departure",
-      departureTime: "Departure time",
-      arrival: "Arrival",
-      arrivalTime: "Arrival Time",
-      price: "Price",
-      duration: "Duration"
-    },
-    continuePayment: "Continue to Payment"
-  },
-  fr: {
-    searchPrompt: "Pas votre première fois ? Entrez votre numéro de téléphone",
-    search: "Rechercher",
-    searching: "Recherche en cours...",
-    passengerInfo: "Informations sur le passager",
-    firstName: "Prénom",
-    lastName: "Nom",
-    gender: "Genre",
-    genderOptions: {
-      male: "Homme",
-      female: "Femme"
-    },
-    contactInfo: "Informations de contact",
-    country: "Pays",
-    email: "Email",
-    ticketOverview: "Aperçu du billet",
-    refunds: {
-      title: "REMBOURSEMENTS ET ÉCHANGES",
-      noRefunds: "Pas de remboursement",
-      exchange: "Échange de date ou d'heure jusqu'à 1h avant le départ"
-    },
-    boarding: {
-      title: "CONDITIONS D'EMBARQUEMENT",
-      id: "Carte d'identité nationale / Passeport requis",
-      ticket: "Billet (imprimé ou numérique)"
-    },
-    luggage: {
-      title: "BAGAGES",
-      carryOn: "1 bagage à main",
-      carryOnWeight: "Max 10kg par bagage à main",
-      checked: "1 bagage en soute - 1 supplémentaire payant",
-      checkedWeight: "Max 23kg par bagage en soute",
-      checkedSize: "Max 50cm x 30cm x 78cm par bagage en soute"
-    },
-    tripSummary: {
-      title: "Résumé de votre voyage",
-      departure: "Départ",
-      departureTime: "Heure de départ",
-      arrival: "Arrivée",
-      arrivalTime: "Heure d'arrivée",
-      price: "Prix",
-      duration: "Durée"
-    },
-    continuePayment: "Continuer vers le paiement"
-  }
-};
-
 export default function Page({ params }: { params: { id: string } }) {
   const lang = 'en';
   const router = useRouter();
-  const t = translations[lang as keyof typeof translations];
+  const { t, i18n } = useTranslation("booking");
+  const [isClient, setIsClient] = useState(false); 
   const searchParams = useSearchParams();
 
   const [firstname, setFirstname] = useState("");
@@ -157,12 +63,9 @@ export default function Page({ params }: { params: { id: string } }) {
   const dateParam = searchParams?.get('date');
   const selectedDate = dateParam ? new Date(dateParam) : new Date();
 
-
-
   const handleSeatSelect = (seat: string) => {
     setSelectedSeat(seat);
   };
-
 
   useEffect(() => {
     const fetchTrip = async () => {
@@ -209,7 +112,6 @@ export default function Page({ params }: { params: { id: string } }) {
 
       if (traveler) {
         setExistingTraveler(traveler);
-        // Split fullname into first and last name
         const [firstName, ...lastNameParts] = traveler.fullname.split(' ');
         setFirstname(firstName);
         setLastname(lastNameParts.join(' '));
@@ -217,7 +119,6 @@ export default function Page({ params }: { params: { id: string } }) {
         setResidence(traveler.nationality);
         setEmail(traveler.email);
       } else {
-        // Clear fields if no traveler found
         setExistingTraveler(null);
         setFirstname('');
         setLastname('');
@@ -231,7 +132,6 @@ export default function Page({ params }: { params: { id: string } }) {
       setIsSearching(false);
     }
   };
-
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -268,10 +168,6 @@ export default function Page({ params }: { params: { id: string } }) {
         travelerId = existingTraveler.id;
       }
 
-      // Extract date from departure_time
-      // const tripDate = new Date(trip.departure_time).toISOString().split('T')[0];
-
-      // Create booking - Now including trip_date
       const bookingResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}bookings/`, {
         method: 'POST',
         headers: {
@@ -285,7 +181,7 @@ export default function Page({ params }: { params: { id: string } }) {
           traveler: travelerId,
           price: trip.price,
           seat_number: selectedSeat,
-          trip_date: selectedDate, // Added trip_date
+          trip_date: selectedDate,
         }),
       });
 
@@ -322,7 +218,6 @@ export default function Page({ params }: { params: { id: string } }) {
   if (!trip) return <div>Loading...</div>;
   const duration = calculateDuration(trip.departure_time, trip.arrival_time);
 
-
   return (
     <>
       {!selectedSeat ? (
@@ -332,15 +227,13 @@ export default function Page({ params }: { params: { id: string } }) {
           selectedDate={selectedDate.toISOString().split('T')[0]}
         />
       ) : (
-
         <div>
-
           <form onSubmit={handleSubmit} className="flex flex-col space-y-6 py-12 bg-white">
             <div className="container grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-stretch">
               <div className="w-full flex flex-col space-y-4 col-span-2">
                 <div className="flex flex-col w-full border rounded-lg shadow-md">
                   <div className="border-b px-6 py-3">
-                    <p className="text-sm font-medium">{t.searchPrompt}</p>
+                    <p className="text-sm font-medium">{t('searchPrompt')}</p>
                   </div>
                   <div className="flex flex-row p-6 space-x-4">
                     <Input
@@ -355,39 +248,39 @@ export default function Page({ params }: { params: { id: string } }) {
                       onClick={searchTraveler}
                       disabled={isSearching}
                     >
-                      {isSearching ? `${t.searching}...` : t.search}
+                      {isSearching ? `${t('searching')}...` : t('search')}
                     </Button>
                   </div>
                 </div>
 
                 <div className="flex flex-col w-full border rounded-lg shadow-md">
                   <div className="border-b px-6 py-3">
-                    <p className="text-sm font-medium">Passenger Info</p>
+                    <p className="text-sm font-medium">{t('passengerInfo')}</p>
                   </div>
                   <div className="flex flex-col md:flex-row p-6 space-y-4 md:space-y-0 md:space-x-4">
                     <Input
                       value={firstname}
                       onChange={(e) => setFirstname(e.target.value)}
                       className="w-full md:w-2/6"
-                      placeholder={t.firstName}
+                      placeholder={t('firstName')}
                       required
                     />
                     <Input
                       value={lastname}
                       onChange={(e) => setLastname(e.target.value)}
                       className="w-full md:w-2/6"
-                      placeholder={t.lastName}
+                      placeholder={t('lastName')}
                       required
                     />
                     <div className="w-full md:w-2/6">
                       <Select value={gender} onValueChange={(value) => setGender(value)} required>
                         <SelectTrigger>
-                          <SelectValue placeholder={t.gender} />
+                          <SelectValue placeholder={t('gender')} />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectGroup>
-                            <SelectItem value="male">{t.genderOptions.male}</SelectItem>
-                            <SelectItem value="female">{t.genderOptions.female}</SelectItem>
+                            <SelectItem value="male">{t('genderOptions.male')}</SelectItem>
+                            <SelectItem value="female">{t('genderOptions.female')}</SelectItem>
                           </SelectGroup>
                         </SelectContent>
                       </Select>
@@ -397,17 +290,17 @@ export default function Page({ params }: { params: { id: string } }) {
 
                 <div className="flex flex-col w-full border rounded-lg shadow-md">
                   <div className="border-b px-6 py-3">
-                    <p className="text-sm font-medium">{t.contactInfo}</p>
+                    <p className="text-sm font-medium">{t('contactInfo')}</p>
                   </div>
                   <div className="space-y-2 p-6">
                     <Input
-                      placeholder={t.country}
+                      placeholder={t('country')}
                       value={residence}
                       onChange={(e) => setResidence(e.target.value)}
                       required
                     />
                     <Input
-                      placeholder={t.email}
+                      placeholder={t('email')}
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
@@ -417,63 +310,60 @@ export default function Page({ params }: { params: { id: string } }) {
                 </div>
 
                 <div className="flex flex-col w-full border rounded-lg shadow-md">
-
                   <div className="border-b px-6 py-3">
-                    <p className="text-sm font-medium">{t.ticketOverview}</p>
+                    <p className="text-sm font-medium">{t('ticketOverview')}</p>
                   </div>
                   <div className="space-y-2 p-6 text-xs text-gray-500">
-                    <p className="font-semibold">{t.refunds.title}</p>
+                    <p className="font-semibold">{t('refunds.title')}</p>
                     <ul>
-                      <li>{t.refunds.noRefunds}</li>
+                      <li>{t('refunds.noRefunds')}</li>
                       <li>
-                        Exchange date or time up to{" "}
-                        <span className="font-semibold">1hr</span> before departure
-                      </li>
+                        {t('refunds.exchange', { time: '1' })}</li>
                     </ul>
-                    <p className="font-semibold">BOARDING REQUIREMENTS</p>
+                    <p className="font-semibold">{t('boarding.title')}</p>
                     <ul>
-                      <li>National ID Card / Passport required</li>
-                      <li>Ticket (printed or digital)</li>
+                      <li>{t('boarding.id')}</li>
+                      <li>{t('boarding.ticket')}</li>
                     </ul>
-                    <p className="font-semibold">LUGGAGE</p>
+                    <p className="font-semibold">{t('luggage.title')}</p>
                     <ul>
-                      <li>1 carry-on bag</li>
-                      <li>Max 10kg per carry-on bag</li>
-                      <li>1 checked bag - free 1 extra - fees apply</li>
-                      <li>Max 23kg per checked bag</li>
-                      <li>Max 50cm x 30cm x 78cm per checked bag</li>
+                      <li>{t('luggage.carryOn')}</li>
+                      <li>{t('luggage.carryOnWeight')}</li>
+                      <li>{t('luggage.checked')}</li>
+                      <li>{t('luggage.checkedWeight')}</li>
+                      <li>{t('luggage.checkedSize')}</li>
                     </ul>
                   </div>
                 </div>
 
                 <Button className="w-full" type="submit">
-                  Continue to Payment
+                  {t('continuePayment')}
                 </Button>
               </div>
 
               <div className="w-full flex flex-col space-y-4">
                 <div className="flex flex-col w-full border rounded-lg shadow-md">
                   <div className="border-b px-6 py-3">
-                    <p className="text-sm font-medium">Your Trip Summary</p>
+                    <p className="text-sm font-medium">{t('tripSummary.title')}</p>
                   </div>
                   <div className="space-y-4 p-6">
                     <p>
-                      Departure: <b>{trip?.departure_location.name}</b>
+                      {t('departure')}: <b>{trip?.departure_location.name}</b>
                     </p>
                     <p>
-                      Departure time: <b>{trip?.departure_time}</b>
+                      {t('departureTime')}: <b>{trip?.departure_time}</b>
                     </p>
                     <p>
-                      Arrival: <b>{trip?.arrival_location.name}</b>
+                      {t('arrival')}: <b>{trip?.arrival_location.name}</b>
                     </p>
                     <p>
-                      Arrival Time: <b>{trip?.arrival_time}</b>
+                      {t('arrivalTime')}: <b>{trip?.arrival_time}</b>
                     </p>
                     <p>
-                      Price: <b>{trip?.price} RWF</b>
+                      {t('price')}: <b>{trip?.price} RWF</b>
                     </p>
                     <p>
-                      Duration: <b>{duration}</b>
+                      {t('duration')}: <b>{duration}</b>
                     </p>
                   </div>
                 </div>

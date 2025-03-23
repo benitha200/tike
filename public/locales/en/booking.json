@@ -1,0 +1,53 @@
+{
+    "searchPrompt": "Not your first time? Enter phone number",
+    "search": "Search",
+    "searching": "Searching...",
+    "passengerInfo": "Passenger Info",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "gender": "Gender",
+    "genderOptions": {
+        "male": "Male",
+        "female": "Female"
+    },
+    "contactInfo": "Contact Information",
+    "country": "Country",
+    "email": "Email",
+    "ticketOverview": "Ticket Overview",
+    "refunds": {
+        "title": "REFUNDS AND EXCHANGES",
+        "noRefunds": "No refunds",
+        "exchange": "Exchange date or time up to {{time}}hour before departure"
+    },
+    "boarding": {
+        "title": "BOARDING REQUIREMENTS",
+        "id": "National ID Card / Passport required",
+        "ticket": "Ticket (printed or digital)"
+    },
+    "luggage": {
+        "title": "LUGGAGE",
+        "carryOn": "1 carry-on bag",
+        "carryOnWeight": "Max 10kg per carry-on bag",
+        "checked": "1 checked bag - free 1 extra - fees apply",
+        "checkedWeight": "Max 23kg per checked bag",
+        "checkedSize": "Max 50cm x 30cm x 78cm per checked bag"
+    },
+    "tripSummary": {
+        "title": "Your Trip Summary",
+        "departure": "Departure",
+        "departureTime": "Departure time",
+        "arrival": "Arrival",
+        "arrivalTime": "Arrival Time",
+        "price": "Price",
+        "duration": "Duration"
+    },
+    "continuePayment": "Continue to Payment",
+        "selectYourSeat": "Select Your Seat",
+        "available": "Available",
+        "pendingPayment": "Pending Payment",
+        "booked": "Booked",
+        "failedPayment": "Failed Payment"
+      
+
+    
+}

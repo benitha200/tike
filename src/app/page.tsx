@@ -294,29 +294,66 @@ export default function Home({ lang = 'en' }: HomeProps) {
     </div>
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
       {[
-         { route: ["Kigali", "Kampala"], image: "/img/kampala.jpg" },
-         { route: ["Kigali", "Nairobi"], image: "/img/nairobi.jpg" },
-         { route: ["Kigali", "Bujumbura"], image: "/img/bujumbura.jpg" },
-         { route: ["Kampala", "Kigali"], image: "/img/kigali.jpg" },
-         { route: ["Nairobi", "Kigali"], image: "/img/bujumbura.jpg" },
-         { route: ["Bujumbura", "Kigali"], image: "/img/kigali2.jpg" },
+        { route: ["Kigali", "Kampala"], image: "/img/kampala.jpg" },
+        { route: ["Kigali", "Nairobi"], image: "/img/nairobi.jpg" },
+        { route: ["Kigali", "Bujumbura"], image: "/img/bujumbura.jpg" },
+        { route: ["Kampala", "Kigali"], image: "/img/kigali.jpg" },
+        { route: ["Nairobi", "Kigali"], image: "/img/bujumbura.jpg" },
+        { route: ["Bujumbura", "Kigali"], image: "/img/kigali2.jpg" },
       ].map((item, index) => (
-        <div key={index} className="relative transition duration-300 ease-in-out hover:scale-105">
+        <div
+          key={index}
+          className="relative transition duration-300 ease-in-out hover:scale-105 cursor-pointer"
+          onClick={() => {
+            // Set departure and arrival locations based on the route
+            const departure = item.route[0];
+            const arrival = item.route[1];
+
+            // Get the IDs for the selected departure and arrival
+            const departureLocation = locations.find(
+              (loc) => loc.name.toLowerCase() === departure.toLowerCase()
+            );
+            const arrivalLocation = locations.find(
+              (loc) => loc.name.toLowerCase() === arrival.toLowerCase()
+            );
+
+            // Check if both locations exist
+            if (departureLocation && arrivalLocation) {
+              setDepartureLocation(departure);
+              setArrivalLocation(arrival);
+              setSelectedDepartureId(departureLocation.id);
+              setSelectedArrivalId(arrivalLocation.id);
+
+              // Redirect to the listings page
+              const searchParams = new URLSearchParams({
+                departure: departureLocation.id,
+                arrival: arrivalLocation.id,
+                date: selectedDate ? selectedDate.toISOString() : new Date().toISOString(),
+              });
+              router.push(`/listings?${searchParams.toString()}`);
+            } else {
+              toast.error(t('locationError'));
+            }
+          }}
+        >
           <div className="absolute top-4 left-4 backdrop-blur-sm text-white bg-white/20 rounded-lg px-3 py-1">
-        <p>{item.route[0]} {t('to')} {item.route[1]}</p>
+            <p>
+              {item.route[0]} {t('to')} {item.route[1]}
+            </p>
           </div>
           <Image
-        src={item.image}
-        className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg"
-        width={400}
-        height={300}
-        alt={`${item.route[0]} ${t('to')} ${item.route[1]}`}
+            src={item.image}
+            className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg"
+            width={400}
+            height={300}
+            alt={`${item.route[0]} ${t('to')} ${item.route[1]}`}
           />
         </div>
       ))}
     </div>
   </div>
 </div>
+
 
 {/* Hidden */}
 <div className="section_explainer py-6 sm:py-12 bg-white container mx-auto px-4 flex flex-col space-y-12 sm:space-y-24 hidden">

@@ -42,7 +42,8 @@ export default function Listings() {
   const [departureLocation, setDepartureLocation] = useState<string>(initialDepartureLocation);
   const [arrivalLocation, setArrivalLocation] = useState<string>(initialArrivalLocation);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date(initialDate));
-  const { t } = useTranslation("listings");
+  const { t, i18n } = useTranslation("home");
+  const [isClient, setIsClient] = useState(false); 
 
   const calculateDuration = (departureTime: string, arrivalTime: string) => {
     const [depHours, depMinutes] = departureTime.split(':').map(Number);
