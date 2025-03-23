@@ -3,6 +3,7 @@ import Header from "@/components/layouts/header";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../styles/global.css";
+import I18nProvider from "../providers/I18nProvider"; // Import the provider
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,11 +20,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className} suppressHydrationWarning={true}>
-        <main className="flex min-h-screen flex-col">
-          <Header />
-          {children}
-          <Footer />
-        </main>
+        <I18nProvider>
+          <main className="flex min-h-screen flex-col">
+            <Header />
+            {children}
+            <Footer />
+          </main>
+        </I18nProvider>
       </body>
     </html>
   );

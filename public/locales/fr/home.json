@@ -1,0 +1,55 @@
+{
+  "title": "Réservez vos billets de bus en ligne",
+  "subtitle": "Remplissez les informations ci-dessous pour commencer",
+  "fromPlaceholder": "Départ",
+  "toPlaceholder": "Arrivée",
+  "search": "Rechercher",
+  "locationError": "Veuillez sélectionner les lieux de départ et d'arrivée",
+  "features": {
+    "priorities": {
+      "title": "Votre voyage, vos priorités",
+      "description": "Petit budget ? Emploi du temps serré ? Réservez des billets adaptés à vos besoins."
+    },
+    "coverage": {
+      "title": "Couverture régionale",
+      "description": "Gagnez du temps en comparant toutes vos options de voyage en bus en un seul endroit."
+    },
+    "support": {
+      "title": "Assistance 24/7",
+      "description": "Notre équipe d'experts est toujours là pour vous aider."
+    }
+  },
+  "topRoutes": {
+    "title": "Les itinéraires de bus les plus populaires"
+  },
+  "whyJoin": {
+    "title": "Pourquoi rejoindre Tike ?",
+    "subtitle": "Réservation et paiement simplifiés",
+    "benefits": [
+      "Gérez et annulez vos voyages facilement",
+      "Enregistrez votre mode de paiement et vos informations de facturation",
+      "Des informations sécurisées pour vos voyages !"
+    ]
+  },
+  "bookOnline": {
+    "title": "Réservez vos billets de bus en ligne",
+    "description": "Chaque jour, des milliers de voyageurs comme vous prennent le bus pour voyager entre les villes. Avec Tike, vous pouvez facilement comparer les bus et trouver des billets de bus abordables pour votre prochain voyage. Que vous souhaitiez voyager en bus vers Kampala, Nairobi, Bujumbura ou ailleurs dans la région, vous pouvez consulter les horaires des bus, les prix des billets et les services proposés à bord. Avec Tike, réservez facilement vos billets de bus en ligne auprès des meilleures compagnies. Consultez les horaires, comparez les prix et découvrez les services disponibles (WiFi, espace supplémentaire pour les jambes, franchise bagages généreuse)."
+  },
+  "faq": {
+    "title": "Questions fréquentes",
+    "questions": [
+      {
+        "question": "Question 1",
+        "answer": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda fugit et dicta maxime odit nemo ipsum molestiae repudiandae maiores numquam dolore, corporis, perferendis explicabo? Officia sint deserunt assumenda suscipit quas!"
+      },
+      {
+        "question": "Question 2",
+        "answer": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda fugit et dicta maxime odit nemo ipsum molestiae repudiandae maiores numquam dolore, corporis, perferendis explicabo? Officia sint deserunt assumenda suscipit quas!"
+      },
+      {
+        "question": "Question 3",
+        "answer": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda fugit et dicta maxime odit nemo ipsum molestiae repudiandae maiores numquam dolore, corporis, perferendis explicabo? Officia sint deserunt assumenda suscipit quas!"
+      }
+    ]
+  }
+}

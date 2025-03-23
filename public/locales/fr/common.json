@@ -1,10 +1,4 @@
 {
-  "origin": "Origine",
-  "destination": "Destination",
-  "station": "Gare",
-  "bus": "Autobus",
-  "currency": "Rwf",
-  "no_trips_found": "Aucun voyage trouvé!",
-  "minutes": "minutes",
-  "hour": "{{count}} heure"
+  "help": "Aide",
+  "contact": "Contactez-nous"
 }

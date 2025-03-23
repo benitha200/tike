@@ -1,0 +1,11 @@
+{
+    "origin": "Origin",
+    "destination": "Destination",
+    "No Trips Found": "No Trips Found",
+    "Try adjusting your search criteria": "Try adjusting your search criteria",
+    "hour": "hour",
+    "minutes": "minutes",
+    "tripDetails": "Trip Details",
+    "departure": "Departure",
+    "arrival": "Arrival"
+  }

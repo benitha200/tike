@@ -1,10 +1,4 @@
 {
-  "origin": "Origin",
-  "destination": "Destination",
-  "station": "Station",
-  "bus": "Bus",
-  "currency": "Rwf",
-  "no_trips_found": "No Trips Found!",
-  "minutes": "minutes",
-  "hour": "{{count}} hr"
+  "help": "Help",
+  "contact": "Contact us"
 }
