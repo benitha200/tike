@@ -167,7 +167,7 @@ export default function Home() {
             />
             <div>
               <h1 className="text-base font-semibold">
-                Your trip, your priorities
+                Your trip, your priority
               </h1>
               <p className="text-sm">
                 On a budget? Tight schedule? Book tickets that fit your needs.

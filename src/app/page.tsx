@@ -42,7 +42,7 @@ const translations = {
     locationError: "Please select departure and arrival locations",
     features: {
       priorities: {
-        title: "Your trip, your priorities",
+        title: "Your trip, your ",
         description: "On a budget? Tight schedule? Book tickets that fit your needs."
       },
       coverage: {
@@ -368,8 +368,8 @@ export default function Home({ lang = 'en' }: HomeProps) {
 
         <ToastContainer />
 
-
-        <div className="flex flex-col sm:flex-row justify-evenly border rounded-lg px-4 sm:px-9 py-4 bg-white  space-y-4 sm:space-y-0">
+        {/* Hidden  */}
+        <div className="flex flex-col sm:flex-row justify-evenly border rounded-lg px-4 sm:px-9 py-4 bg-white  space-y-4 sm:space-y-0 hidden">
           {[
             {
               src: "/illustrations/options.svg",
@@ -401,6 +401,7 @@ export default function Home({ lang = 'en' }: HomeProps) {
             </div>
           ))}
         </div >
+
         <div className="section_top_routes py-8 sm:py-12 bg-slate-100">
           <div className="container mx-auto px-4">
             <div className="text-center mb-8">
@@ -431,7 +432,8 @@ export default function Home({ lang = 'en' }: HomeProps) {
             </div>
           </div>
         </div>
-        <div className="section_explainer py-6 sm:py-12 bg-white container mx-auto px-4 flex flex-col space-y-12 sm:space-y-24">
+        {/* Hidden */}
+        <div className="section_explainer py-6 sm:py-12 bg-white container mx-auto px-4 flex flex-col space-y-12 sm:space-y-24 hidden">
           <div className="flex flex-col sm:flex-row justify-between items-center bg-slate-100 py-6 sm:py-12 px-6 sm:px-12 md:px-20 lg:px-40 rounded-lg space-y-6 sm:space-y-0 sm:space-x-6">
             <div className="w-full sm:w-1/2">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold pb-4 sm:pb-6"> {t.whyJoin.title}</h1>
