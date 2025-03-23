@@ -34,15 +34,15 @@ interface HomeProps {
 // Translation dictionary
 const translations = {
   en: {
-    title: "Find easy bus tickets for your next trips",
-    subtitle: "Easily book your next trip with Tike",
+    title: "Book your bus tickets online",
+    subtitle: "Fill in the details below to get started",
     fromPlaceholder: "From",
     toPlaceholder: "To",
     search: "Search",
     locationError: "Please select departure and arrival locations",
     features: {
       priorities: {
-        title: "Your trip, your ",
+        title: "Your trip, your priorities",
         description: "On a budget? Tight schedule? Book tickets that fit your needs."
       },
       coverage: {
@@ -51,7 +51,7 @@ const translations = {
       },
       support: {
         title: "24/7 support",
-        description: "Our world class team of experts is always here to help."
+        description: "Our world-class team of experts is always here to help."
       }
     },
     topRoutes: {
@@ -63,12 +63,12 @@ const translations = {
       benefits: [
         "Manage and cancel your trips with ease",
         "Save your payment method and billing information",
-        "Security information for your trips!"
+        "Secure information for your trips!"
       ]
     },
     bookOnline: {
       title: "Book your bus tickets online",
-      description: "Every day, thousands of travelers like you take buses to travel between cities. With Tike, you can easily compare buses and find cheap bus tickets for your next bus trip. Whether you want to travel by bus to Kampala, Nairobi, Bujumbura, or anywhere else in the region, you can check the bus schedules, ticket prices and the services on the bus. With Tike, you can easily book your cheap bus tickets online from the best bus company. With Tike, you can easily check the bus schedules, ticket prices, cheap bus trips and what services are offered on the bus (WiFi, extra legroom, generous luggage allowance)."
+      description: "Every day, thousands of travelers like you take buses to travel between cities. With Tike, you can easily compare buses and find cheap bus tickets for your next bus trip. Whether you want to travel by bus to Kampala, Nairobi, Bujumbura, or anywhere else in the region, you can check the bus schedules, ticket prices, and the services on the bus. With Tike, you can easily book your cheap bus tickets online from the best bus company. With Tike, you can easily check the bus schedules, ticket prices, cheap bus trips, and what services are offered on the bus (WiFi, extra legroom, generous luggage allowance)."
     },
     faq: {
       title: "Frequently asked questions",
@@ -89,44 +89,44 @@ const translations = {
     }
   },
   fr: {
-    title: "Trouvez facilement des billets de bus pour vos prochains voyages",
-    subtitle: "Réservez facilement votre prochain voyage avec Tike",
-    fromPlaceholder: "De",
-    toPlaceholder: "À",
+    title: "Réservez vos billets de bus en ligne",
+    subtitle: "Remplissez les informations ci-dessous pour commencer",
+    fromPlaceholder: "Départ",
+    toPlaceholder: "Arrivée",
     search: "Rechercher",
     locationError: "Veuillez sélectionner les lieux de départ et d'arrivée",
     features: {
       priorities: {
         title: "Votre voyage, vos priorités",
-        description: "Petit budget ? Programme serré ? Réservez des billets qui répondent à vos besoins."
+        description: "Petit budget ? Emploi du temps serré ? Réservez des billets adaptés à vos besoins."
       },
       coverage: {
         title: "Couverture régionale",
         description: "Gagnez du temps en comparant toutes vos options de voyage en bus en un seul endroit."
       },
       support: {
-        title: "Support 24/7",
-        description: "Notre équipe d'experts de classe mondiale est toujours là pour vous aider."
+        title: "Assistance 24/7",
+        description: "Notre équipe d'experts est toujours là pour vous aider."
       }
     },
     topRoutes: {
-      title: "Itinéraires de bus les plus fréquentés"
+      title: "Les itinéraires de bus les plus populaires"
     },
     whyJoin: {
       title: "Pourquoi rejoindre Tike ?",
-      subtitle: "Réservation et paiement plus rapides",
+      subtitle: "Réservation et paiement simplifiés",
       benefits: [
         "Gérez et annulez vos voyages facilement",
-        "Sauvegardez votre mode de paiement et vos informations de facturation",
-        "Informations de sécurité pour vos voyages !"
+        "Enregistrez votre mode de paiement et vos informations de facturation",
+        "Des informations sécurisées pour vos voyages !"
       ]
     },
     bookOnline: {
       title: "Réservez vos billets de bus en ligne",
-      description: "Chaque jour, des milliers de voyageurs comme vous prennent le bus pour voyager entre les villes. Avec Tike, vous pouvez facilement comparer les bus et trouver des billets de bus pas chers pour votre prochain voyage. Que vous souhaitiez voyager en bus vers Kampala, Nairobi, Bujumbura ou n'importe où ailleurs dans la région, vous pouvez vérifier les horaires des bus, les prix des billets et les services à bord du bus. Avec Tike, vous pouvez facilement réserver vos billets de bus pas chers en ligne auprès de la meilleure compagnie de bus. Avec Tike, vous pouvez facilement vérifier les horaires des bus, les prix des billets, les voyages en bus pas chers et les services proposés dans le bus (WiFi, espace pour les jambes supplémentaire, franchise bagages généreuse)."
+      description: "Chaque jour, des milliers de voyageurs comme vous prennent le bus pour voyager entre les villes. Avec Tike, vous pouvez facilement comparer les bus et trouver des billets de bus abordables pour votre prochain voyage. Que vous souhaitiez voyager en bus vers Kampala, Nairobi, Bujumbura ou ailleurs dans la région, vous pouvez consulter les horaires des bus, les prix des billets et les services proposés à bord. Avec Tike, réservez facilement vos billets de bus en ligne auprès des meilleures compagnies. Consultez les horaires, comparez les prix et découvrez les services disponibles (WiFi, espace supplémentaire pour les jambes, franchise bagages généreuse)."
     },
     faq: {
-      title: "Questions fréquemment posées",
+      title: "Questions fréquentes",
       questions: [
         {
           question: "Question 1",
