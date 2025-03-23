@@ -1,56 +1,64 @@
-
 {
-    "title": "Book your bus tickets online",
-    "subtitle": "Fill in the details below to get started",
-    "fromPlaceholder": "From",
-    "toPlaceholder": "To",
-    "search": "Search",
-    "locationError": "Please select departure and arrival locations",
-    "features": {
-        "priorities": {
-            "title": "Your trip, your priorities",
-            "description": "On a budget? Tight schedule? Book tickets that fit your needs."
-        },
-        "coverage": {
-            "title": "Regional coverage",
-            "description": "Save time by comparing all your bus travel options in one place."
-        },
-        "support": {
-            "title": "24/7 support",
-            "description": "Our world-class team of experts is always here to help."
-        }
+  "to":"to",
+  "title": "Book your bus tickets online",
+  "subtitle": "Fill in the details below to get started",
+  "fromPlaceholder": "From",
+  "toPlaceholder": "To",
+  "search": "Search",
+  "locationError": "Please select departure and arrival locations",
+  "features": {
+    "priorities": {
+      "title": "Your trip, your priorities",
+      "description": "On a budget? Tight schedule? Book tickets that fit your needs."
     },
-    "topRoutes": {
-        "title": "Top travelled bus routes"
+    "coverage": {
+      "title": "Regional coverage",
+      "description": "Save time by comparing all your bus travel options in one place."
     },
-    "whyJoin": {
-        "title": "Why join Tike?",
-        "subtitle": "Faster booking and checkout",
-        "benefits": [
-            "Manage and cancel your trips with ease",
-            "Save your payment method and billing information",
-            "Secure information for your trips!"
-        ]
-    },
-    "bookOnline": {
-        "title": "Book your bus tickets online",
-        "description": "Every day, thousands of travelers like you take buses to travel between cities. With Tike, you can easily compare buses and find cheap bus tickets for your next bus trip. Whether you want to travel by bus to Kampala, Nairobi, Bujumbura, or anywhere else in the region, you can check the bus schedules, ticket prices, and the services on the bus. With Tike, you can easily book your cheap bus tickets online from the best bus company. With Tike, you can easily check the bus schedules, ticket prices, cheap bus trips, and what services are offered on the bus (WiFi, extra legroom, generous luggage allowance)."
-    },
-    "faq": {
-        "title": "Frequently asked questions",
-        "questions": [
-            {
-                "question": "Question 1",
-                "answer": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda fugit et dicta maxime odit nemo ipsum molestiae repudiandae maiores numquam dolore, corporis, perferendis explicabo? Officia sint deserunt assumenda suscipit quas!"
-            },
-            {
-                "question": "Question 2",
-                "answer": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda fugit et dicta maxime odit nemo ipsum molestiae repudiandae maiores numquam dolore, corporis, perferendis explicabo? Officia sint deserunt assumenda suscipit quas!"
-            },
-            {
-                "question": "Question 3",
-                "answer": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda fugit et dicta maxime odit nemo ipsum molestiae repudiandae maiores numquam dolore, corporis, perferendis explicabo? Officia sint deserunt assumenda suscipit quas!"
-            }
-        ]
+    "support": {
+      "title": "24/7 support",
+      "description": "Our world-class team of experts is always here to help."
     }
+  },
+  "topRoutes": {
+    "title": "Top travelled bus routes",
+    "routes": {
+      "kigaliToKampala": "Kigali to Kampala",
+      "kigaliToNairobi": "Kigali to Nairobi",
+      "kigaliToBujumbura": "Kigali to Bujumbura",
+      "kampalaToKigali": "Kampala to Kigali",
+      "nairobiToKigali": "Nairobi to Kigali",
+      "bujumburaToKigali": "Bujumbura to Kigali"
+    }
+  },
+  "whyJoin": {
+    "title": "Why join Tike?",
+    "subtitle": "Faster booking and checkout",
+    "benefits": [
+      "Manage and cancel your trips with ease",
+      "Save your payment method and billing information",
+      "Secure information for your trips!"
+    ]
+  },
+  "bookOnline": {
+    "title": "Book your bus tickets online",
+    "description": "Every day, thousands of travelers like you take buses to travel between cities. With Tike, you can easily compare buses and find cheap bus tickets for your next bus trip. Whether you want to travel by bus to Kampala, Nairobi, Bujumbura, or anywhere else in the region, you can check the bus schedules, ticket prices, and the services on the bus. With Tike, you can easily book your cheap bus tickets online from the best bus company. With Tike, you can easily check the bus schedules, ticket prices, cheap bus trips, and what services are offered on the bus (WiFi, extra legroom, generous luggage allowance)."
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "questions": {
+      "q1": {
+        "question": "What is the booking process?",
+        "answer": "You can book your travel online through our website."
+      },
+      "q2": {
+        "question": "Can I cancel my booking?",
+        "answer": "Yes, you can cancel your booking within 24 hours of booking."
+      },
+      "q3": {
+        "question": "Do you offer group discounts?",
+        "answer": "Yes, we offer discounts for group bookings."
+      }
+    }
+  }
 }

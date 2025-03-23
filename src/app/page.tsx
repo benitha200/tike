@@ -253,6 +253,134 @@ export default function Home({ lang = 'en' }: HomeProps) {
       </div>
 
       <ToastContainer />
+      {/* Hidden */}
+<div className="flex flex-col sm:flex-row justify-evenly border rounded-lg px-4 sm:px-9 py-4 bg-white space-y-4 sm:space-y-0 hidden">
+  {[
+    {
+      src: "/illustrations/options.svg",
+      title: t('features.priorities.title'),
+      description: t('features.priorities.description')
+    },
+    {
+      src: "/illustrations/coverage.svg",
+      title: t('features.coverage.title'),
+      description: t('features.coverage.description'),
+    },
+    {
+      src: "/illustrations/support.svg",
+      title: t('features.support.title'),
+      description: t('features.support.description'),
+    }
+  ].map((item, index) => (
+    <div key={index} className="flex justify-center items-center space-x-3">
+      <Image
+        src={item.src}
+        width={50}
+        height={50}
+        alt=""
+      />
+      <div className="opacity-90">
+        <h1 className="text-base font-semibold">{item.title}</h1>
+        <p className="text-sm">{item.description}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+<div className="section_top_routes py-8 sm:py-12 bg-slate-100">
+  <div className="container mx-auto px-4">
+    <div className="text-center mb-8">
+      <h1 className="font-bold text-2xl sm:text-3xl">{t('topRoutes.title')}</h1>
+    </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      {[
+         { route: ["Kigali", "Kampala"], image: "/img/kampala.jpg" },
+         { route: ["Kigali", "Nairobi"], image: "/img/nairobi.jpg" },
+         { route: ["Kigali", "Bujumbura"], image: "/img/bujumbura.jpg" },
+         { route: ["Kampala", "Kigali"], image: "/img/kigali.jpg" },
+         { route: ["Nairobi", "Kigali"], image: "/img/bujumbura.jpg" },
+         { route: ["Bujumbura", "Kigali"], image: "/img/kigali2.jpg" },
+      ].map((item, index) => (
+        <div key={index} className="relative transition duration-300 ease-in-out hover:scale-105">
+          <div className="absolute top-4 left-4 backdrop-blur-sm text-white bg-white/20 rounded-lg px-3 py-1">
+        <p>{item.route[0]} {t('to')} {item.route[1]}</p>
+          </div>
+          <Image
+        src={item.image}
+        className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg"
+        width={400}
+        height={300}
+        alt={`${item.route[0]} ${t('to')} ${item.route[1]}`}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+{/* Hidden */}
+<div className="section_explainer py-6 sm:py-12 bg-white container mx-auto px-4 flex flex-col space-y-12 sm:space-y-24 hidden">
+  <div className="flex flex-col sm:flex-row justify-between items-center bg-slate-100 py-6 sm:py-12 px-6 sm:px-12 md:px-20 lg:px-40 rounded-lg space-y-6 sm:space-y-0 sm:space-x-6">
+    <div className="w-full sm:w-1/2">
+      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold pb-4 sm:pb-6">{t('whyJoin.title')}</h1>
+      <p className="font-bold pb-3">{t('whyJoin.subtitle')}</p>
+      <ul className="list-disc pl-5">
+        <li>{t('whyJoin.benefits.0')}</li>
+        <li>{t('whyJoin.benefits.1')}</li>
+        <li>{t('whyJoin.benefits.2')}</li>
+      </ul>
+    </div>
+    <Image
+      src={"/illustrations/traveling.svg"}
+      className="w-full sm:w-1/2 h-40 sm:h-60 object-contain"
+      width={400}
+      height={400}
+      alt="Traveling illustration"
+    />
+  </div>
+
+  <div className="flex flex-col sm:flex-row justify-between space-y-6 sm:space-y-0 sm:space-x-6">
+    <Image
+      src={"/illustrations/questions.svg"}
+      className="w-full sm:w-1/2 h-48 sm:h-72 object-contain"
+      width={400}
+      height={400}
+      alt="Questions illustration"
+    />
+    <div className="w-full sm:w-1/2">
+      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold pb-4">{t('bookOnline.title')}</h1>
+      <p className="pb-6 text-sm sm:text-base">{t('bookOnline.description')}</p>
+      <h2 className="text-xl sm:text-2xl font-semibold pb-4">{t('faq.title')}</h2>
+      <div className="flex flex-col space-y-2">
+        <Collapsible className="border-b py-2">
+          <CollapsibleTrigger className="font-bold pb-2 w-full text-left">
+            {t('faq.questions.0.question')}
+          </CollapsibleTrigger>
+          <CollapsibleContent className="text-sm sm:text-base">
+            {t('faq.questions.0.answer')}
+          </CollapsibleContent>
+        </Collapsible>
+        <Collapsible className="border-b py-2">
+          <CollapsibleTrigger className="font-bold pb-2 w-full text-left">
+            {t('faq.questions.1.question')}
+          </CollapsibleTrigger>
+          <CollapsibleContent className="text-sm sm:text-base">
+            {t('faq.questions.1.answer')}
+          </CollapsibleContent>
+        </Collapsible>
+        <Collapsible className="border-b py-2">
+          <CollapsibleTrigger className="font-bold pb-2 w-full text-left">
+            {t('faq.questions.2.question')}
+          </CollapsibleTrigger>
+          <CollapsibleContent className="text-sm sm:text-base">
+            {t('faq.questions.2.answer')}
+          </CollapsibleContent>
+        </Collapsible>
+      </div>
+    </div>
+  </div>
+</div>
+  
     </>
   );
 }
