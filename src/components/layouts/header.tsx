@@ -71,6 +71,7 @@ export default function Header() {
 
   return (
     <header className="top-0 z-0 w-full bg-white">
+      
       <div className="container h-14 flex justify-between items-center">
         {/* Logo and link to home page */}
         <Link href={`/${currentLang}`}>
@@ -79,11 +80,25 @@ export default function Header() {
 
         {/* Navigation and language switcher */}
         <nav className="flex items-center justify-between space-x-6">
-            <Link
+          <Link
             href={`/${currentLang}/contact`}
-            className="px-3 py-1 mx-1 rounded bg-black text-white hover:bg-gray-900 whitespace-nowrap"
-            >
+            className="px-3 py-1 mx-1 rounded bg-black text-white hover:bg-gray-900 whitespace-nowrap hidden sm:inline"
+          >
             {t("contact")}
+          </Link>
+            <Link
+              href={`/${currentLang}/contact`}
+              className="sm:hidden"
+              aria-label={t("contact")}
+            >
+              <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="w-6 h-6 text-black"
+              >
+              <path d="M1.5 4.5A2.25 2.25 0 0 1 3.75 2.25h16.5A2.25 2.25 0 0 1 22.5 4.5v15a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 19.5v-15zm2.25-.75a.75.75 0 0 0-.75.75v.662l9 5.625 9-5.625V4.5a.75.75 0 0 0-.75-.75H3.75zm18 3.348-8.719 5.448a1.5 1.5 0 0 1-1.562 0L2.25 7.098v12.402c0 .414.336.75.75.75h16.5a.75.75 0 0 0 .75-.75V7.098z" />
+              </svg>
             </Link>
           <LanguageSwitcher />
         </nav>
