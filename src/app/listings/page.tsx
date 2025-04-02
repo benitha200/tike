@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { DatePicker } from "@/components/ui/datepicker";
 import Image from "next/image";
@@ -31,7 +31,7 @@ export default function Listings() {
     id: string;
     name: string;
   }
-
+  
   const searchParams = useSearchParams();
   const initialDepartureLocation = searchParams?.get("departure") || "";
   const initialArrivalLocation = searchParams?.get("arrival") || "";
@@ -42,7 +42,9 @@ export default function Listings() {
   const [departureLocation, setDepartureLocation] = useState<string>(initialDepartureLocation);
   const [arrivalLocation, setArrivalLocation] = useState<string>(initialArrivalLocation);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date(initialDate));
-  const { t, i18n } = useTranslation("home");
+  const lang = 'en';
+  const router = useRouter();
+  const { t, i18n } = useTranslation("listings");
   const [isClient, setIsClient] = useState(false); 
 
   const calculateDuration = (departureTime: string, arrivalTime: string) => {
