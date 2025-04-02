@@ -81,7 +81,7 @@ export default function Header() {
         <nav className="flex items-center justify-between space-x-6">
             <Link
             href={`/${currentLang}/contact`}
-            className="px-3 py-1 mx-2 rounded bg-black text-white hover:bg-gray-900 whitespace-nowrap"
+            className="px-3 py-1 mx-1 rounded bg-black text-white hover:bg-gray-900 whitespace-nowrap"
             >
             {t("contact")}
             </Link>
