@@ -16,19 +16,22 @@ import { CheckCircle } from 'lucide-react';
 
 interface Booking {
   id: string;
+  departure_time: string;
+  arrival_time: string;
+  trip_date: string;
+  arrival_date: string;
+  inStopName: string;
+  outStopName: string;
+  price: number;
   traveler: {
     fullname: string;
   };
   trip: {
-    departure_location: {
+    id: string;
+    route: {
+      id: string;
       name: string;
-    };
-    arrival_location: {
-      name: string;
-    };
-    departure_time: string;
-    arrival_time: string;
-    price: number;
+    }
   };
 }
 
@@ -171,7 +174,7 @@ export default function Payment() {
           "Authorization": `Bearer ${process.env.NEXT_PUBLIC_AUTH_TOKEN}`
         },
         body: JSON.stringify({
-          amount: booking.trip.price,
+          amount: booking.price,
           phoneNumber: phoneNumber
         })
       });
@@ -273,13 +276,13 @@ export default function Payment() {
   //   Arrival_time: new Date(booking.trip.arrival_time).toLocaleString(),
   // });
 
-  const duration = calculateDuration(booking.trip.departure_time, booking.trip.arrival_time);
+  const duration = calculateDuration(booking.departure_time, booking.arrival_time);
   const bookingDetails = JSON.stringify({
     Name: booking.traveler.fullname,
-    Departure: booking.trip.departure_location.name,
-    Departure_time: formatDateTime(booking.trip.departure_time),
-    Arrival: booking.trip.arrival_location.name,
-    Arrival_time: formatDateTime(booking.trip.arrival_time),
+    Departure: booking.inStopName,
+    Departure_time: formatDateTime(booking.departure_time),
+    Arrival: booking.outStopName,
+    Arrival_time: formatDateTime(booking.arrival_time),
   });
 
   return (
@@ -331,7 +334,7 @@ export default function Payment() {
               <Input
                 placeholder="Price"
                 type="number"
-                value={booking.trip.price}
+                value={booking.price}
                 readOnly
               />
             </div>
@@ -376,10 +379,10 @@ export default function Payment() {
 
               <div>
                 <p>Name: <b>{booking.traveler.fullname}</b></p>
-                <p>Departure: <b>{booking.trip.departure_location.name}</b></p>
-                <p>Departure time: <b>{booking.trip.departure_time}</b></p>
-                <p>Arrival: <b>{booking.trip.arrival_location.name}</b></p>
-                <p>Arrival Time: <b>{booking.trip.arrival_time}</b></p>
+                <p>Departure: <b>{booking.inStopName}</b></p>
+                <p>Departure time: <b>{booking.departure_time}</b></p>
+                <p>Arrival: <b>{booking.outStopName}</b></p>
+                <p>Arrival Time: <b>{booking.arrival_time}</b></p>
                 <p>Duration: <b>{duration}</b></p>
               </div>
             

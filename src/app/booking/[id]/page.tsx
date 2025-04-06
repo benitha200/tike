@@ -19,18 +19,33 @@ import { useTranslation } from "react-i18next";
 
 interface Trip {
   id: string;
-  departure_location: {
-    name: string;
-    country: string;
-  };
-  arrival_location: {
-    name: string;
-    country: string;
-  };
+  route: Route;
   departure_time: string;
-  arrival_time: string;
+}
+
+interface Route {
+  id: string;
+  name: string;
+  departure_location: Location;
+  arrival_location: Location;
+  total_price: number;
+  total_duration: number;
+  routeStops: RouteStops[];
+}
+
+interface RouteStops {
+  id: string;
+  stopName: string;
+  stopOrder: number;
+  duration: number;
   price: number;
 }
+
+interface Location {
+  id: string;
+  name: string;
+}
+
 
 interface Traveler {
   id: string;
@@ -41,7 +56,7 @@ interface Traveler {
   email: string;
 }
 
-export default function Page({ params }: { params: { id: string } }) {
+export default function Page({ params }: { params: { id: string,inStop: string, outStop: string } }) {
   const lang = 'en';
   const router = useRouter();
   const { t, i18n } = useTranslation("booking");
@@ -55,12 +70,16 @@ export default function Page({ params }: { params: { id: string } }) {
   const [email, setEmail] = useState<string | undefined>(undefined);
   const [phonenumber, setPhonenumber] = useState<string | undefined>(undefined);
   const [trip, setTrip] = useState<Trip | null>(null);
+  const [inStop, setinStop] = useState<RouteStops | null>(null);
+  const [outStop, setoutStop] = useState<RouteStops | null>(null);
   const [existingTraveler, setExistingTraveler] = useState<Traveler | null>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [selectedSeat, setSelectedSeat] = useState<string | null>(null);
 
   const tripId = params?.id;
   const dateParam = searchParams?.get('date');
+  const inStopId = searchParams?.get('inStop');
+  const outStopId = searchParams?.get('outStop');;
   const selectedDate = dateParam ? new Date(dateParam) : new Date();
 
   const handleSeatSelect = (seat: string) => {
@@ -83,6 +102,12 @@ export default function Page({ params }: { params: { id: string } }) {
 
           const data = await response.json();
           setTrip(data.payload);
+          debugger;
+          const inStop = data.payload.route.routeStops.find((stop: RouteStops) => stop.id === inStopId);
+          const outStop = data.payload.route.routeStops.find((stop: RouteStops) => stop.id === outStopId);
+           setinStop(inStop);
+           setoutStop(outStop);
+
         } catch (error) {
           console.error('Error fetching trip:', error);
         }
@@ -179,7 +204,8 @@ export default function Page({ params }: { params: { id: string } }) {
           is_one_way: true,
           trip: trip.id,
           traveler: travelerId,
-          price: trip.price,
+          instop: inStop?.id,
+          outstop: outStop?.id,
           seat_number: selectedSeat,
           trip_date: selectedDate,
         }),
@@ -214,9 +240,40 @@ export default function Page({ params }: { params: { id: string } }) {
       return `${hours}h ${minutes}min`;
     }
   };
+  function showTripArrivalTime(trip: Trip): string {
+
+    const totalMinutes =  trip.route.total_duration;
+    const departure = new Date(`1970-01-01T${trip.departure_time}`);
+    departure.setMinutes(departure.getMinutes() + totalMinutes);
+    const arrivalTimeStr = `${String(departure.getHours()).padStart(2, '0')}:${String(departure.getMinutes()).padStart(2, '0')}`;
+    return arrivalTimeStr;
+  }
+
+  function showStopArrivalTime(trip : Trip,stop: RouteStops): string {
+  const departure = new Date(`1970-01-01T${trip.departure_time}`);
+  const stopOrder = stop.stopOrder;
+
+  let totalDuration = 0;
+  for (let i = 0; i < stopOrder; i++) {
+    const previousStop = trip.route.routeStops.find(s => s.stopOrder === i);
+    if (previousStop) {
+    totalDuration +=  previousStop.duration;
+    }
+  }
+
+  departure.setMinutes(departure.getMinutes() + totalDuration+stop.duration);
+  const departureTimeStr = `${String(departure.getHours()).padStart(2, '0')}` + ":" + `${String(departure.getMinutes()).padStart(2, '0')}`;
+  return departureTimeStr;
+  }
+
+   // Calculate price for selected stops
+  const calculatePrice = (trip: Trip,inStop: RouteStops | null, outStop: RouteStops | null) => {
+    if (!inStop || !outStop) return trip.route.total_price;
+    return Math.abs(outStop.price - inStop.price);
+  };
 
   if (!trip) return <div>Loading...</div>;
-  const duration = calculateDuration(trip.departure_time, trip.arrival_time);
+  const duration = trip.route.total_duration;
 
   return (
     <>
@@ -348,19 +405,22 @@ export default function Page({ params }: { params: { id: string } }) {
                   </div>
                   <div className="space-y-4 p-6">
                     <p>
-                      {t('departure')}: <b>{trip?.departure_location.name}</b>
+                      {t('route')}: <b>{trip.route.name}</b>
                     </p>
                     <p>
-                      {t('departureTime')}: <b>{trip?.departure_time}</b>
+                      {t('departure')}: <b>{inStop? inStop.stopName:trip?.route.departure_location.name}</b>
                     </p>
                     <p>
-                      {t('arrival')}: <b>{trip?.arrival_location.name}</b>
+                      {t('departureTime')}: <b>{inStop ? showStopArrivalTime(trip, inStop) : trip.departure_time} </b>
                     </p>
                     <p>
-                      {t('arrivalTime')}: <b>{trip?.arrival_time}</b>
+                      {t('arrival')}: <b>{outStop? outStop.stopName:trip?.route.arrival_location.name}</b>
                     </p>
                     <p>
-                      {t('price')}: <b>{trip?.price} RWF</b>
+                      {t('arrivalTime')}: <b>{outStop ? showStopArrivalTime(trip, outStop) : showTripArrivalTime(trip)}</b>
+                    </p>
+                    <p>
+                      {t('price')}: <b>{calculatePrice(trip,inStop,outStop)} RWF</b>
                     </p>
                     <p>
                       {t('duration')}: <b>{duration}</b>
