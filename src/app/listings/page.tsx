@@ -370,7 +370,7 @@ export default function Listings() {
                             <h3 className="font-medium mb-3">Select Boarding Point</h3>
                             <div className="relative">
                               <div className="flex space-x-4 pb-4 overflow-x-auto scroll-smooth" style={{ scrollbarWidth: 'thin' }}>
-                                {trip.route.routeStops.map(stop => (
+                                {trip.route.routeStops.sort((a, b) => a.stopOrder - b.stopOrder).map(stop => (
                                   <div
                                     key={`in-${stop.id}`}
                                     className={`flex-shrink-0 w-64 p-3 border rounded-lg cursor-pointer transition-colors ${
@@ -409,7 +409,7 @@ export default function Listings() {
                             <h3 className="font-medium mb-3">Select Alighting Point</h3>
                             <div className="relative">
                               <div className="flex space-x-4 pb-4 overflow-x-auto scroll-smooth" style={{ scrollbarWidth: 'thin' }}>
-                                {trip.route.routeStops.map(stop => {
+                                {trip.route.routeStops.sort((a, b) => a.stopOrder - b.stopOrder).map(stop => {
                                   const isValid = isOutStopValid(trip.id, stop.id);
                                   return (
                                     <div
