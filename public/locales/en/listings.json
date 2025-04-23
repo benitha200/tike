@@ -7,5 +7,15 @@
     "minutes": "minutes",
     "tripDetails": "Trip Details",
     "departure": "Departure",
-    "arrival": "Arrival"
+    "arrival": "Arrival",
+    "selectBoardingStop": "Select Boarding Stop",
+    "selectDropOffStop": "Select Drop Off Stop",
+    "duration": "Duration",
+    "price": "Price",
+    "stop": "Stop",
+    "bookNow": "Book Now",
+    "selectStops": "Select Stops"
+
+
+
   }

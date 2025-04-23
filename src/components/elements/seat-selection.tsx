@@ -19,9 +19,11 @@ interface SeatSelectionProps {
   onSeatSelect?: (seat: string) => void;
   trip: Trip;
   selectedDate: string;
+  inStopId: string;
+  outStopId: string;
 }
 
-const SeatSelection: React.FC<SeatSelectionProps> = ({ onSeatSelect, trip, selectedDate }) => {
+const SeatSelection: React.FC<SeatSelectionProps> = ({ onSeatSelect, trip, selectedDate, inStopId,outStopId }) => {
   const { t } = useTranslation("booking");
   const [selectedSeat, setSelectedSeat] = useState<string | null>(null);
   const [hoveredSeat, setHoveredSeat] = useState<string | null>(null);
@@ -36,7 +38,7 @@ const SeatSelection: React.FC<SeatSelectionProps> = ({ onSeatSelect, trip, selec
     const fetchSeatStatus = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}bookings/seats/${trip.id}?date=${selectedDate}`,
+          `${process.env.NEXT_PUBLIC_API_URL}bookings/seats/${trip.id}?date=${selectedDate}&instopid=${inStopId}&outstopid=${outStopId}`,
           {
             headers: { 
               'Authorization': `Bearer ${Cookies.get('token')}`
@@ -66,7 +68,10 @@ const SeatSelection: React.FC<SeatSelectionProps> = ({ onSeatSelect, trip, selec
     };
 
     fetchSeatStatus();
-  }, [trip.id, selectedDate]);
+    const interval = setInterval(fetchSeatStatus, 10000);
+
+    return () => clearInterval(interval);
+  }, [trip.id, selectedDate, inStopId, outStopId]);
 
   const getSeatStatus = (seatLabel: string): 'paid' | 'pending' | 'failed' | 'selected' | 'available' => {
     const paymentState = seatStatus.paymentStatus[seatLabel];

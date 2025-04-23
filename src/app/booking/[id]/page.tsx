@@ -282,6 +282,8 @@ export default function Page({ params }: { params: { id: string,inStop: string, 
           onSeatSelect={handleSeatSelect}
           trip={trip}
           selectedDate={selectedDate.toISOString().split('T')[0]}
+          inStopId={inStop?.id || ''}
+          outStopId={outStop?.id || ''}
         />
       ) : (
         <div>

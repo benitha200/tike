@@ -354,8 +354,8 @@ export default function Listings() {
                         }}
                       >
                         {expandedTripId === trip.id ? 
-                        t("BOOK NOW") : 
-                        t("SELECT STOPS")}
+                        t("bookNow") : 
+                        t("selectStops")}
                         <MdArrowForwardIos className="ml-1 md:ml-2" />
                       </Button>
                       </div>
@@ -367,7 +367,7 @@ export default function Listings() {
                         <div className="grid grid-cols-1 gap-6">
                           {/* Boarding Points Section */}
                           <div>
-                            <h3 className="font-medium mb-3">Select Boarding Point</h3>
+                            <h3 className="font-medium mb-3">{t("selectBoardingStop")}</h3>
                             <div className="relative">
                               <div className="flex space-x-4 pb-4 overflow-x-auto scroll-smooth" style={{ scrollbarWidth: 'thin' }}>
                                 {trip.route.routeStops.sort((a, b) => a.stopOrder - b.stopOrder).map(stop => (
@@ -387,7 +387,7 @@ export default function Listings() {
                                       <div>
                                         <p className="font-medium">{stop.stopName}</p>
                                         <p className="text-sm text-gray-500">
-                                          Stop #{stop.stopOrder} • Departure: {showStopArrivalTime(trip, stop)}
+                                          {t("stop")} #{stop.stopOrder} • {t("departure")}: {showStopArrivalTime(trip, stop)}
                                         </p>
                                       </div>
                                       {selectedStops[trip.id]?.inStop === stop.id && (
@@ -406,7 +406,7 @@ export default function Listings() {
 
                           {/* Alighting Points Section */}
                           <div>
-                            <h3 className="font-medium mb-3">Select Alighting Point</h3>
+                            <h3 className="font-medium mb-3">{t("selectDropOffStop")}</h3>
                             <div className="relative">
                               <div className="flex space-x-4 pb-4 overflow-x-auto scroll-smooth" style={{ scrollbarWidth: 'thin' }}>
                                 {trip.route.routeStops.sort((a, b) => a.stopOrder - b.stopOrder).map(stop => {
@@ -433,7 +433,7 @@ export default function Listings() {
                                             {stop.stopName}
                                           </p>
                                           <p className={`text-sm ${!isValid ? "text-gray-300" : "text-gray-500"}`}>
-                                            Stop #{stop.stopOrder} • Arrival: {showStopArrivalTime(trip, stop)}
+                                            {t('stop')} #{stop.stopOrder} • {t('arrival')}: {showStopArrivalTime(trip, stop)}
                                           </p>
                                         </div>
                                         {selectedStops[trip.id]?.outStop === stop.id && (
