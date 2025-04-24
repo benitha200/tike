@@ -56,7 +56,7 @@ export default function Payment() {
   useEffect(() => {
     if (!params?.id) return;
 
-    const timerKey = `paymentTimer_${params.id}`;
+    const timerKey = params?.id ? `paymentTimer_${params.id}` : '';
     const savedTime = localStorage.getItem(timerKey);
     const savedEndTime = localStorage.getItem(`${timerKey}_endTime`);
 
@@ -92,7 +92,7 @@ export default function Payment() {
   useEffect(() => {
     if (!params?.id || timeLeft <= 0) return;
 
-    const timerKey = `paymentTimer_${params.id}`;
+    const timerKey = params?.id ? `paymentTimer_${params.id}` : '';
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         const newTime = prev - 1;
@@ -196,7 +196,7 @@ export default function Payment() {
               message: 'Payment successful'
             });
             // Clear the timer on success
-            const timerKey = `paymentTimer_${params.id}`;
+            const timerKey = params?.id ? `paymentTimer_${params.id}` : '';
             localStorage.removeItem(timerKey);
             localStorage.removeItem(`${timerKey}_endTime`);
             resolve(true);
