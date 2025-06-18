@@ -12,6 +12,10 @@ import { Input } from "@/components/ui/input";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader, CheckCircle, AlertCircle } from "lucide-react";
 import QRCode from "react-qr-code";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+import { createRoot } from "react-dom/client";
+import { SuccessTickAnimation } from "@/components/animations/SuccessTickAnimation";
 
 interface Booking {
   id: string;
@@ -24,15 +28,13 @@ interface Booking {
   price: number;
   canceled: boolean;
   payment_status: string;
+  routeName: string;
   traveler: {
     fullname: string;
   };
   trip: {
     id: string;
-    route: {
-      id: string;
-      name: string;
-    }
+    
   };
 }
 
@@ -323,12 +325,12 @@ export default function Payment() {
     try {
       const date = new Date(dateTimeStr);
       if (isNaN(date.getTime())) {
-        console.error('Invalid date:', dateTimeStr);
+        //console.error('Invalid date:', dateTimeStr);
         return 'Invalid date';
       }
       return date.toLocaleString();
     } catch (error) {
-      console.error('Error formatting date:', error);
+      //console.error('Error formatting date:', error);
       return 'Invalid date';
     }
   };
@@ -377,6 +379,108 @@ export default function Payment() {
     }
   }, [paymentStatus.status]);
 
+  // Helper to render QR code and add to PDF
+  const renderQRCodeToPDF = async (doc: jsPDF) => {
+    const qrDiv = document.createElement("div");
+    qrDiv.style.position = "absolute";
+    qrDiv.style.left = "-9999px";
+    document.body.appendChild(qrDiv);
+
+    const root = createRoot(qrDiv);
+    root.render(
+      <QRCode
+        size={160}
+        value={bookingDetails}
+        bgColor="#ffffff"
+        fgColor="#1e293b"
+        level="H"
+      />
+    );
+
+    setTimeout(async () => {
+      const canvas = await html2canvas(qrDiv, { backgroundColor: "#fff" });
+      const imgData = canvas.toDataURL("image/png");
+      doc.addImage(imgData, "PNG", 120, 35, 70, 70);
+      root.unmount();
+      document.body.removeChild(qrDiv);
+      doc.save("ticket.pdf");
+    }, 500);
+  };
+
+  const handleDownloadPDF = () => {
+    if (!booking) return;
+    const doc = new jsPDF();
+
+    // Header
+    doc.setFillColor(30, 58, 138); // blue-800
+    doc.rect(0, 0, 210, 30, "F");
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(22);
+    doc.setFont("helvetica", "bold");
+    doc.text("Bus Ticket", 105, 20, { align: "center" });
+
+    // Main Info Box
+    doc.setFillColor(241, 245, 249); // slate-100
+    doc.roundedRect(10, 35, 90, 90, 5, 5, "F");
+    doc.setTextColor(30, 41, 59); // slate-800
+    doc.setFontSize(13);
+    doc.setFont("helvetica", "normal");
+    let y = 45;
+    const lineGap = 10;
+    doc.text(`Name:`, 15, y);
+    doc.setFont("helvetica", "bold");
+    doc.text(booking.traveler.fullname, 45, y);
+    doc.setFont("helvetica", "normal");
+    y += lineGap;
+    doc.text(`Route:`, 15, y);
+    doc.setFont("helvetica", "bold");
+    doc.text(booking.routeName, 45, y);
+    doc.setFont("helvetica", "normal");
+    y += lineGap;
+    doc.text(`Departure:`, 15, y);
+    doc.setFont("helvetica", "bold");
+    doc.text(booking.inStopName, 45, y);
+    doc.setFont("helvetica", "normal");
+    y += lineGap;
+    doc.text(`Departure Time:`, 15, y);
+    doc.setFont("helvetica", "bold");
+    doc.text(booking.departure_time, 60, y);
+    doc.setFont("helvetica", "normal");
+    y += lineGap;
+    doc.text(`Arrival:`, 15, y);
+    doc.setFont("helvetica", "bold");
+    doc.text(booking.outStopName, 45, y);
+    doc.setFont("helvetica", "normal");
+    y += lineGap;
+    doc.text(`Arrival Time:`, 15, y);
+    doc.setFont("helvetica", "bold");
+    doc.text( booking.arrival_time, 60, y);
+    doc.setFont("helvetica", "normal");
+    y += lineGap;
+    doc.text(`Duration:`, 15, y);
+    doc.setFont("helvetica", "bold");
+    doc.text(calculateDuration(booking.departure_time, booking.arrival_time), 45, y);
+    doc.setFont("helvetica", "normal");
+    y += lineGap;
+    doc.text(`Price:`, 15, y);
+    doc.setFont("helvetica", "bold");
+    doc.text(`${booking.price} RWF`, 45, y);
+
+    // Decorative line
+    doc.setDrawColor(30, 58, 138);
+    doc.setLineWidth(1);
+    doc.line(10, 130, 200, 130);
+
+    // Footer
+    doc.setFontSize(10);
+    doc.setTextColor(100, 116, 139); // slate-400
+    doc.setFont("helvetica", "italic");
+    doc.text("Thank you for choosing Tike. Have a safe journey!", 105, 140, { align: "center" });
+
+    // Add QR code
+    renderQRCodeToPDF(doc);
+  };
+
   // Render loading state if booking is not yet loaded
   if (!booking) return <div>Loading...</div>;
 
@@ -409,10 +513,18 @@ export default function Payment() {
             >
               &times;
             </button>
+            {/* Tick animation */}
+            <SuccessTickAnimation />
             <h2 className="text-3xl font-bold mb-6 text-center text-green-700">
               Thank you for your payment!
             </h2>
             <p className="text-lg text-center">Your payment was successful. We appreciate your business.</p>
+            <Button
+              className="mt-6 px-6 py-3 "
+              onClick={handleDownloadPDF}
+            >
+              Save Ticket 
+            </Button>
           </div>
         </div>
       )}
@@ -595,7 +707,7 @@ export default function Payment() {
                   value={bookingDetails}
                   viewBox={`0 0 256 256`}
                 />
-              </div>
+              </div> 
               <hr />
 
               <div>
@@ -610,6 +722,18 @@ export default function Payment() {
           </div>
         </div>
       </div>
+
+      {/* Secret button to open success popup in development mode */}
+      {process.env.NODE_ENV === "development" && (
+        <button
+          style={{ position: "fixed", bottom: 20, left: 20, zIndex: 10000, opacity: 0.2 }}
+          onClick={() => setShowSuccessPopup(true)}
+          aria-label="Open Success Popup (Dev Only)"
+        >
+          Dev Popup
+        </button>
+      )}
     </div>
   );
 }
+

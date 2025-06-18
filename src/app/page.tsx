@@ -443,7 +443,7 @@ export default function Home({ lang = 'en' }: HomeProps) {
               </h2>
               <div className="flex flex-col gap-6 w-full">
                 <a
-                  href="https://wa.me/250788123456"
+                  href="https://wa.me/250781285813"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-3 py-4 px-6 rounded-lg bg-green-100 hover:bg-green-200 text-green-800 text-lg font-semibold transition"
@@ -452,7 +452,7 @@ export default function Home({ lang = 'en' }: HomeProps) {
                   {t('contactOptions.whatsapp', { ns: 'common' })}
                 </a>
                 <a
-                  href="mailto:info@tike.com"
+                  href="mailto:info@tike.rw"
                   className="flex items-center justify-center gap-3 py-4 px-6 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-800 text-lg font-semibold transition"
                 >
                   <FaEnvelope className="text-2xl" />

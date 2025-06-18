@@ -33,6 +33,7 @@
     "i18next-translation-parser": "^1.0.1",
     "intouch-payments": "^2.0.3",
     "js-cookie": "^3.0.5",
+    "jspdf": "^3.0.1",
     "lucide-react": "^0.259.0",
     "next": "13.4.9",
     "postcss": "8.4.25",
