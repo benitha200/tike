@@ -1,4 +1,3 @@
-
 "use client"
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
@@ -50,6 +49,10 @@ export default function Payment() {
     message: ''
   });
   const [timeLeft, setTimeLeft] = useState<number>(60); // 60 seconds = 1 minute
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [showFailPopup, setShowFailPopup] = useState(false);
+  const [showTimeoutPopup, setShowTimeoutPopup] = useState(false);
+  const [showPhoneError, setShowPhoneError] = useState(false);
   const params = useParams();
 
   // Load timer from localStorage or initialize
@@ -239,10 +242,7 @@ export default function Payment() {
 
   const handlePayment = async () => {
     if (!booking || !phoneNumber) {
-      setPaymentStatus({
-        status: 'failed',
-        message: 'Please enter a valid phone number'
-      });
+      setShowPhoneError(true);
       return;
     }
 
@@ -352,6 +352,31 @@ export default function Payment() {
     }
   };
 
+  // Move this up so all hooks are before any return
+  useEffect(() => {
+    if (paymentStatus.status === 'success') {
+      setShowSuccessPopup(true);
+      setShowFailPopup(false);
+      setShowTimeoutPopup(false);
+      setShowPhoneError(false);
+    } else if (paymentStatus.status === 'failed') {
+      setShowFailPopup(true);
+      setShowSuccessPopup(false);
+      setShowTimeoutPopup(false);
+      setShowPhoneError(false);
+    } else if (paymentStatus.status === 'timeout') {
+      setShowTimeoutPopup(true);
+      setShowSuccessPopup(false);
+      setShowFailPopup(false);
+      setShowPhoneError(false);
+    } else {
+      setShowSuccessPopup(false);
+      setShowFailPopup(false);
+      setShowTimeoutPopup(false);
+      setShowPhoneError(false);
+    }
+  }, [paymentStatus.status]);
+
   // Render loading state if booking is not yet loaded
   if (!booking) return <div>Loading...</div>;
 
@@ -373,6 +398,79 @@ export default function Payment() {
 
   return (
     <div className="flex flex-col space-y-6 py-12 bg-white">
+      {/* Payment Success Popup */}
+      {showSuccessPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md mx-auto flex flex-col items-center relative animate-fade-in">
+            <button
+              className="absolute top-4 right-4 text-2xl text-gray-500 hover:text-black focus:outline-none"
+              onClick={() => setShowSuccessPopup(false)}
+              aria-label="Close"
+            >
+              &times;
+            </button>
+            <h2 className="text-3xl font-bold mb-6 text-center text-green-700">
+              Thank you for your payment!
+            </h2>
+            <p className="text-lg text-center">Your payment was successful. We appreciate your business.</p>
+          </div>
+        </div>
+      )}
+      {/* Payment Failure Popup */}
+      {showFailPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md mx-auto flex flex-col items-center relative animate-fade-in">
+            <button
+              className="absolute top-4 right-4 text-2xl text-gray-500 hover:text-black focus:outline-none"
+              onClick={() => setShowFailPopup(false)}
+              aria-label="Close"
+            >
+              &times;
+            </button>
+            <h2 className="text-3xl font-bold mb-6 text-center text-red-700">
+              Sorry, payment failed
+            </h2>
+            <p className="text-lg text-center">{paymentStatus.message || 'There was a problem processing your payment. Please try again.'}</p>
+          </div>
+        </div>
+      )}
+      {/* Payment Timeout Popup */}
+      {showTimeoutPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md mx-auto flex flex-col items-center relative animate-fade-in">
+            <button
+              className="absolute top-4 right-4 text-2xl text-gray-500 hover:text-black focus:outline-none"
+              onClick={() => setShowTimeoutPopup(false)}
+              aria-label="Close"
+            >
+              &times;
+            </button>
+            <h2 className="text-3xl font-bold mb-6 text-center text-orange-700">
+              Payment Time Expired
+            </h2>
+            <p className="text-lg text-center">Payment time has expired. Please start a new booking.</p>
+          </div>
+        </div>
+      )}
+      {/* Phone Number Error Popup */}
+      {showPhoneError && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md mx-auto flex flex-col items-center relative animate-fade-in">
+            <button
+              className="absolute top-4 right-4 text-2xl text-gray-500 hover:text-black focus:outline-none"
+              onClick={() => setShowPhoneError(false)}
+              aria-label="Close"
+            >
+              &times;
+            </button>
+            <h2 className="text-3xl font-bold mb-6 text-center text-red-700">
+              Please enter a valid phone number
+            </h2>
+            <p className="text-lg text-center">A valid phone number is required to process your payment.</p>
+          </div>
+        </div>
+      )}
+
       {/* Timer display at the top */}
       {!booking?.canceled && booking?.payment_status !== "FAILED" && (
           <div className="container">
