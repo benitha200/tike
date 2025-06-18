@@ -15,7 +15,7 @@ import QRCode from "react-qr-code";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { createRoot } from "react-dom/client";
-import { SuccessTickAnimation } from "@/components/animations/SuccessTickAnimation";
+import { FailedCrossAnimation, SuccessTickAnimation } from "@/components/animations/StatusAnimation";
 
 interface Booking {
   id: string;
@@ -539,6 +539,7 @@ export default function Payment() {
             >
               &times;
             </button>
+            <FailedCrossAnimation />
             <h2 className="text-3xl font-bold mb-6 text-center text-red-700">
               Sorry, payment failed
             </h2>
