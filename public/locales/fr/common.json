@@ -1,4 +1,8 @@
 {
   "help": "Aide",
-  "contact": "Contactez-nous"
+  "contact": "Contactez-nous",
+  "contactOptions": {
+    "whatsapp": "WhatsApp",
+    "email": "E-mail"
+  }
 }

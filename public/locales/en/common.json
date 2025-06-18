@@ -1,4 +1,8 @@
 {
   "help": "Help",
-  "contact": "Contact us"
+  "contact": "Contact us",
+  "contactOptions": {
+    "whatsapp": "WhatsApp",
+    "email": "Email"
+  }
 }

@@ -1,4 +1,8 @@
 {
   "help": "Ubufasha",
-  "contact": "Tuvugishe"
+  "contact": "Tuvugishe",
+  "contactOptions": {
+    "whatsapp": "WhatsApp",
+    "email": "Imeyili"
+  }
 }

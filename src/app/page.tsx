@@ -18,6 +18,7 @@ import { IoSearch } from "react-icons/io5";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import { FaWhatsapp, FaEnvelope } from "react-icons/fa";
 
 interface Location {
   id: string;
@@ -32,7 +33,7 @@ interface HomeProps {
 
 export default function Home({ lang = 'en' }: HomeProps) {
   const router = useRouter();
-  const { t, i18n } = useTranslation("home");
+  const { t, i18n } = useTranslation(["home", "common"]);
   const [isClient, setIsClient] = useState(false);  // Check for client-side rendering
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [locations, setLocations] = useState<Location[]>([]);
@@ -46,6 +47,7 @@ export default function Home({ lang = 'en' }: HomeProps) {
   const [selectedArrivalId, setSelectedArrivalId] = useState('');
   const [showDepartureLocations, setShowDepartureLocations] = useState(false);
   const [showArrivalLocations, setShowArrivalLocations] = useState(false);
+  const [showContactOptions, setShowContactOptions] = useState(false);
 
   useEffect(() => {
     setIsClient(true);  // Set the flag when client is ready
@@ -418,6 +420,49 @@ export default function Home({ lang = 'en' }: HomeProps) {
   </div>
 </div>
   
+      {/* Floating Contact Us Button (now fullscreen modal like header) */}
+      <div>
+        <Button
+          className="fixed bottom-8 right-8 z-50 bg-green-600 text-white shadow-lg px-6 py-3 rounded-full flex items-center space-x-2 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400"
+          onClick={() => setShowContactOptions((prev) => !prev)}
+        >
+          <span>{t('contact', { ns: 'common' })}</span>
+        </Button>
+        {showContactOptions && (
+          <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+            <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md mx-auto flex flex-col items-center relative animate-fade-in">
+              <button
+                className="absolute top-4 right-4 text-2xl text-gray-500 hover:text-black focus:outline-none"
+                onClick={() => setShowContactOptions(false)}
+                aria-label="Close"
+              >
+                &times;
+              </button>
+              <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
+                {t('contact', { ns: 'common' })}
+              </h2>
+              <div className="flex flex-col gap-6 w-full">
+                <a
+                  href="https://wa.me/250788123456"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-3 py-4 px-6 rounded-lg bg-green-100 hover:bg-green-200 text-green-800 text-lg font-semibold transition"
+                >
+                  <FaWhatsapp className="text-2xl" />
+                  {t('contactOptions.whatsapp', { ns: 'common' })}
+                </a>
+                <a
+                  href="mailto:info@tike.com"
+                  className="flex items-center justify-center gap-3 py-4 px-6 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-800 text-lg font-semibold transition"
+                >
+                  <FaEnvelope className="text-2xl" />
+                  {t('contactOptions.email', { ns: 'common' })}
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </>
   );
 }
