@@ -137,6 +137,13 @@ export default function Header() {
               </div>
             </div>
           )}
+          <button
+            type="button"
+            className="px-3 py-1 mx-1 rounded bg-black text-white hover:bg-gray-900 whitespace-nowrap hidden sm:inline"
+            onClick={() => window.location.href = `/check-ticket`}
+          >
+            Check My Ticket
+          </button>
           <LanguageSwitcher />
         </nav>
       </div>
