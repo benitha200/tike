@@ -115,7 +115,7 @@ export default function Page({ params }: { params: { id: string,inStop: string, 
     };
 
     fetchTrip();
-  }, [tripId]);
+  }, [tripId, inStopId, outStopId]);
 
   const searchTraveler = async () => {
     if (!phonenumber) return;
