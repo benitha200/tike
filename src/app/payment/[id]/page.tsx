@@ -120,7 +120,7 @@ export default function Payment() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [params?.id, timeLeft]);
+  }, [params?.id, timeLeft, paymentStatus.status]);
 
   useEffect(() => {
     const fetchBooking = async () => {
@@ -388,13 +388,15 @@ export default function Payment() {
 
     const root = createRoot(qrDiv);
     root.render(
-      <QRCode
-        size={160}
-        value={bookingDetails}
-        bgColor="#ffffff"
-        fgColor="#1e293b"
-        level="H"
-      />
+      <React.Fragment>
+        <QRCode
+          size={160}
+          value={bookingDetails}
+          bgColor="#ffffff"
+          fgColor="#1e293b"
+          level="H"
+        />
+      </React.Fragment>
     );
 
     setTimeout(async () => {
