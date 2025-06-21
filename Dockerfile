@@ -5,10 +5,10 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 # Copy dependencies
-COPY package.json package-lock.json* ./
+COPY package.json yarn.lock ./
 
 # Install dependencies
-RUN npm install --legacy-peer-deps
+RUN yarn install --legacy-peer-deps
 
 # Copy the rest of the app
 COPY . .
@@ -27,8 +27,8 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 # Install only production dependencies
-COPY --from=builder /app/package.json /app/package-lock.json ./
-RUN npm install --legacy-peer-deps --omit=dev
+COPY --from=builder /app/package.json /app/yarn.lock ./
+RUN yarn install --production --ignore-scripts --prefer-offline
 
 # Copy built app from builder
 COPY --from=builder /app/public ./public
@@ -41,4 +41,4 @@ COPY --from=builder /app/package.json ./
 EXPOSE 3012
 
 # Start the Next.js app
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
